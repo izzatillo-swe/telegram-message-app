@@ -24,12 +24,18 @@ public class UserService {
         return token;
     }
 
-    public void registerChatIdForUser(String token, Long chatId) {
-        User user = userRepository.findByTelegramTokenAndDeletedFalse(token)
-                .orElseThrow(() -> new RuntimeException("Token not found"));
+    public boolean registerChatIdForUser(String token, Long chatId) {
+        return userRepository.findByTelegramTokenAndDeletedFalse(token)
+                .map(user -> {
+                    user.setChatId(chatId);
+                    userRepository.save(user);
+                    return true;
+                })
+                .orElse(false);
+    }
 
-        user.setChatId(chatId);
-        userRepository.save(user);
+    public boolean existsByChatId(Long chatId) {
+        return userRepository.existsByChatIdAndDeletedFalse(chatId);
     }
 
 }

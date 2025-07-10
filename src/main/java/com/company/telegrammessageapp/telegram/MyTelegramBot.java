@@ -31,9 +31,19 @@ public class MyTelegramBot extends TelegramLongPollingBot {
             Long chatId = update.getMessage().getChatId();
             String text = message.getText();
 
-            userService.registerChatIdForUser(text, chatId);
+            boolean isUserConnected = userService.existsByChatId(chatId);
 
-            sendMessage(chatId, "✅ Токен был принят и подключен.");
+            if (!isUserConnected) {
+                if (text.equals("/start")) {
+                    sendMessage(chatId, "Пожалуйста, сгенерируйте токен и отправьте его сюда.");
+                } else {
+                    if (userService.registerChatIdForUser(text, chatId)) {
+                        sendMessage(chatId, "✅ Токен был принят и подключен.");
+                    } else {
+                        sendMessage(chatId, "Токен недействителен, пожалуйста, сгенерируйте другой.");
+                    }
+                }
+            }
         }
 
     }

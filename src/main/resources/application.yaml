@@ -1,1 +1,33 @@
-spring.application.name=telegram-message-app
+spring:
+  application:
+    name: telegram-message-app
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: 123
+    url: jdbc:postgresql://localhost:5432/message_app_db
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+
+server:
+  servlet:
+    context-path: '/message-app'
+
+  port: 8080
+
+springdoc:
+  swagger-ui:
+    path: ''
+    try-it-out-enabled: on
+
+info:
+  application:
+    base_url: 'http://localhost:${server.port}${server.servlet.context-path}'

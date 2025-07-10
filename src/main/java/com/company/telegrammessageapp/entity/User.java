@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,12 +41,20 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
+    @Column(unique = true)
+    private String telegramToken;
+
+    private Long chatId;
+
     @Column(nullable = false)
     private boolean deleted = false;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages = new ArrayList<>();
 
     public User(String name, String username, String password) {
         this.name = name;

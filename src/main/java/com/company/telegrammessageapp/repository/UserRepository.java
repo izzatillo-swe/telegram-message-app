@@ -12,6 +12,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUsernameAndDeletedFalse(String username);
 
+    Optional<User> findByTelegramTokenAndDeletedFalse(String telegramToken);
+
     boolean existsByUsernameAndDeletedFalse(String username);
 
 }

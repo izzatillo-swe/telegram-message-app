@@ -26,6 +26,11 @@ app:
       key: umoH5OyB7qqXg9aaTN7MUcCepWfQUDXnQGp0mKSBj5SEPGHJMnfVLUSV0SSmDrpk
       expiration: 2592000000 # 30 days
 
+telegram:
+  bot:
+    token: 7677069364:AAHGyEk5aFV75noNR0ejJSYcG6ITagpHwtA
+    username: message_telegram_app_bot
+
 server:
   servlet:
     context-path: '/message-app'

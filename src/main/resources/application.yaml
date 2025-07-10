@@ -17,6 +17,15 @@ spring:
       ddl-auto: update
     open-in-view: true
 
+app:
+  jwt:
+    access:
+      key: kH4kOjSIBDRlcIwMd1FRDRHf7rkBss4YNUuqgFShabn7Z9PqoFKx165KVQtnTzUT
+      expiration: 604800000 # 7 days
+    refresh:
+      key: umoH5OyB7qqXg9aaTN7MUcCepWfQUDXnQGp0mKSBj5SEPGHJMnfVLUSV0SSmDrpk
+      expiration: 2592000000 # 30 days
+
 server:
   servlet:
     context-path: '/message-app'
